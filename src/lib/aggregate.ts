@@ -59,6 +59,16 @@ export function totalIncome(records: FinancialRecord[]): number {
     .reduce((sum, r) => sum + r.amount, 0);
 }
 
+/** Money spent (expenses, bills, installments) – excludes savings. */
+export function totalExpenses(records: FinancialRecord[]): number {
+  return records
+    .filter((r) =>
+      ["expense", "bill", "installment"].includes(r.type)
+    )
+    .reduce((sum, r) => sum + r.amount, 0);
+}
+
+/** All outflows (expenses, bills, savings, installments) – used for balance. */
 export function totalOutgoings(records: FinancialRecord[]): number {
   return records
     .filter((r) =>

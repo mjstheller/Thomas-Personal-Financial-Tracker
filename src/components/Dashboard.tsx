@@ -5,7 +5,7 @@ import type { FinancialRecord } from "@/types/record";
 import {
   filterByPeriod,
   balance,
-  totalOutgoings,
+  totalExpenses,
   totalSavings,
   monthlyExpensesForChart,
   balanceOverTimeForChart,
@@ -34,7 +34,7 @@ export function Dashboard({ records }: DashboardProps) {
   );
 
   const totalBalance = useMemo(() => balance(filtered), [filtered]);
-  const totalExpenses = useMemo(() => totalOutgoings(filtered), [filtered]);
+  const totalExpensesAmount = useMemo(() => totalExpenses(filtered), [filtered]);
   const totalSavingsAmount = useMemo(() => totalSavings(filtered), [filtered]);
 
   const barData = useMemo(
@@ -92,10 +92,10 @@ export function Dashboard({ records }: DashboardProps) {
               Total expenses
             </p>
             <p className="text-2xl md:text-3xl font-semibold text-[var(--foreground)] tabular-nums tracking-tight break-all">
-              ${totalExpenses.toFixed(2)}
+              ${totalExpensesAmount.toFixed(2)}
             </p>
             <p className="text-[13px] text-[var(--muted)] mt-1.5">
-              Bills, expenses, and installments
+              Bills, expenses, and installments (savings not included)
             </p>
           </div>
           <div className="card-surface rounded-2xl p-5 md:p-6">
