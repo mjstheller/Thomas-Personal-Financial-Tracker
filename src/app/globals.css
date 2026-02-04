@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  /* Apple-inspired palette: soft, refined, high contrast for readability */
+  --background: #f2f2f7;
+  --background-elevated: #ffffff;
+  --foreground: #1c1c1e;
+  --foreground-secondary: #3a3a3c;
+  --muted: #8e8e93;
+  --fill-tertiary: #e5e5ea;
+  --fill-quaternary: #d1d1d6;
+  --primary: #0071e3;
+  --primary-hover: #0077ed;
+  --primary-muted: rgba(0, 113, 227, 0.12);
+  --danger: #ff3b30;
+  --danger-hover: #ff453a;
+  --danger-muted: rgba(255, 59, 48, 0.12);
+  --success: #34c759;
+  --focus-ring: #0071e3;
+  /* Safe area for notched devices */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  /* Shadows - subtle depth like iOS */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 24px 48px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, var(--font-sans), "Segoe UI", system-ui, sans-serif;
+  font-size: clamp(16px, 4vw, 17px);
+  line-height: 1.47;
+  overflow-x: hidden;
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Touch targets, cursor, and hover for clickables */
+button,
+a[role="button"],
+input[type="submit"],
+input[type="button"],
+[tabindex="0"],
+a {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a[role="button"],
+input[type="submit"],
+input[type="button"],
+[tabindex="0"] {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (hover: hover) {
+  button:hover,
+  a[role="button"]:hover,
+  input[type="submit"]:hover,
+  input[type="button"]:hover {
+    opacity: 0.88;
+  }
+}
+button:active,
+a[role="button"]:active,
+input[type="submit"]:active,
+input[type="button"]:active {
+  opacity: 0.95;
+}
+
+/* Card surface - use .card-surface in components */
+.card-surface {
+  background: var(--background-elevated);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  border: none;
+}
+
+.card-surface:active {
+  box-shadow: var(--shadow-sm);
+}
+
+@media (hover: hover) {
+  .card-surface:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+/* Segmented control / pill group */
+.segmented-pill {
+  background: var(--fill-tertiary);
+  border-radius: 10px;
+  padding: 3px;
+  display: inline-flex;
+  gap: 0;
+}
+
+.segmented-pill button {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.segmented-pill button[data-active="true"] {
+  background: var(--background-elevated);
+  color: var(--foreground);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Input style - soft, Apple-like */
+.input-soft {
+  background: var(--background-elevated);
+  border: 1px solid var(--fill-quaternary);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-soft:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-muted);
+}
+
+.input-soft::placeholder {
+  color: var(--muted);
+}
+
+/* Select dropdowns and clickable controls */
+select {
+  cursor: pointer;
+}
